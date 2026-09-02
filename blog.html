@@ -1,0 +1,1297 @@
+Claro. Copie todo o código abaixo, cole no VS Code e salve como index.html. Depois, abra o arquivo no navegador.
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="A história de três meninas de Pinhal de São Bento apaixonadas por futebol."
+  />
+
+  <title>Três Meninas, Um Sonho</title>
+
+  <style>
+    /* =========================
+       CONFIGURAÇÕES GERAIS
+    ========================== */
+
+    :root {
+      --azul: #2563eb
+;
+      --roxo: #7c3aed
+;
+      --rosa: #ec4899
+;
+      --amarelo: #facc15
+;
+      --verde: #10b981
+;
+      --laranja: #f97316
+;
+
+      --fundo: #f7f8ff
+;
+      --fundo-card: #ffffff
+;
+      --texto: #202033
+;
+      --texto-suave: #62627a
+;
+      --borda: #e6e7f0
+;
+      --sombra: 0 18px 45px rgba(57, 48, 122, 0.12);
+    }
+
+    body.escuro {
+      --fundo: #111323
+;
+      --fundo-card: #1d2035
+;
+      --texto: #f8f8ff
+;
+      --texto-suave: #c4c5d8
+;
+      --borda: #343850
+;
+      --sombra: 0 18px 45px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 4px solid var(--amarelo);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    .secao {
+      padding: 90px 0;
+    }
+
+    .titulo-secao {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .titulo-secao span {
+      color: var(--rosa);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+    }
+
+    .titulo-secao h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin-top: 8px;
+    }
+
+    .titulo-secao p {
+      color: var(--texto-suave);
+      max-width: 650px;
+      margin: 12px auto 0;
+    }
+
+    /* =========================
+       CABEÇALHO E MENU
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: color-mix(in srgb, var(--fundo-card) 90%, transparent);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .barra-navegacao {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--roxo);
+    }
+
+    .logo-bola {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul), var(--rosa));
+      color: white;
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+    }
+
+    nav a {
+      font-weight: bold;
+      color: var(--texto-suave);
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--rosa);
+    }
+
+    .acoes-menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .botao-icone,
+    .botao-menu {
+      border: 1px solid var(--borda);
+      background: var(--fundo-card);
+      color: var(--texto);
+      border-radius: 12px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .botao-icone:hover,
+    .botao-menu:hover {
+      transform: translateY(-2px);
+      background: #f0edff
+;
+    }
+
+    .botao-menu {
+      display: none;
+    }
+
+    /* =========================
+       SEÇÃO PRINCIPAL
+    ========================== */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 110px 0 90px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(236, 72, 153, 0.2), transparent 27%),
+        radial-gradient(circle at 90% 20%, rgba(37, 99, 235, 0.2), transparent 28%),
+        linear-gradient(135deg, #fff2fb
+, #eef4ff
+);
+    }
+
+    body.escuro .hero {
+      background:
+        radial-gradient(circle at 10% 15%, rgba(236, 72, 153, 0.18), transparent 27%),
+        radial-gradient(circle at 90% 20%, rgba(37, 99, 235, 0.18), transparent 28%),
+        #151832
+;
+    }
+
+    .hero-conteudo {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 50px;
+      background: #fff0a8
+;
+      color: #705b00
+;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 strong {
+      color: var(--roxo);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--texto-suave);
+      max-width: 600px;
+      margin-bottom: 28px;
+    }
+
+    .botoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .botao {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-weight: bold;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .botao:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.2);
+    }
+
+    .botao-principal {
+      background: linear-gradient(135deg, var(--roxo), var(--rosa));
+      color: white;
+    }
+
+    .botao-secundario {
+      background: var(--fundo-card);
+      color: var(--roxo);
+      border: 1px solid var(--borda);
+    }
+
+    .hero-arte {
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .bola-grande {
+      width: 265px;
+      height: 265px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      background:
+        radial-gradient(circle at 35% 25%, #ffffff
+ 0 5%, transparent 6%),
+        linear-gradient(135deg, var(--azul), var(--roxo) 55%, var(--rosa));
+      box-shadow:
+        0 30px 55px rgba(91, 58, 210, 0.35),
+        inset -18px -20px 35px rgba(0, 0, 0, 0.18);
+      animation: flutuar 4s ease-in-out infinite;
+    }
+
+    .bola-grande::before {
+      content: "⚽";
+      font-size: 4rem;
+      margin-bottom: 4px;
+    }
+
+    .bola-grande strong {
+      font-size: 1.45rem;
+    }
+
+    .anos-bola {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    /* Números menores conforme solicitado */
+    .ano-pequeno {
+      font-size: 0.75rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 3px 8px;
+    }
+
+    .estrela {
+      position: absolute;
+      font-size: 2rem;
+      animation: girar 5s linear infinite;
+    }
+
+    .estrela-1 {
+      top: 20px;
+      right: 10%;
+      color: var(--amarelo);
+    }
+
+    .estrela-2 {
+      bottom: 30px;
+      left: 5%;
+      color: var(--verde);
+    }
+
+    @keyframes flutuar {
+      0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-15px) rotate(3deg);
+      }
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       CARDS DAS MENINAS
+    ========================== */
+
+    .filtros {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .filtro {
+      border: 1px solid var(--borda);
+      background: var(--fundo-card);
+      color: var(--texto);
+      border-radius: 50px;
+      padding: 10px 18px;
+      font-weight: bold;
+    }
+
+    .filtro.ativo,
+    .filtro:hover {
+      color: white;
+      background: var(--roxo);
+      border-color: var(--roxo);
+    }
+
+    .grid-meninas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card-menina {
+      position: relative;
+      overflow: hidden;
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--sombra);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .card-menina:hover {
+      transform: translateY(-8px);
+    }
+
+    .card-menina.escondido {
+      display: none;
+    }
+
+    .card-menina::before {
+      content: "";
+      position: absolute;
+      height: 8px;
+      inset: 0 0 auto;
+      background: var(--cor-card);
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--cor-card);
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .card-menina h3 {
+      font-size: 1.7rem;
+      margin-bottom: 8px;
+    }
+
+    .card-menina .funcao {
+      color: var(--cor-card);
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .card-menina p {
+      color: var(--texto-suave);
+    }
+
+    .mais-info {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, margin-top 0.4s ease;
+    }
+
+    .card-menina.aberto .mais-info {
+      max-height: 180px;
+      margin-top: 14px;
+    }
+
+    .ler-mais {
+      margin-top: 20px;
+      border: none;
+      background: transparent;
+      color: var(--roxo);
+      font-weight: bold;
+      padding: 0;
+    }
+
+    /* =========================
+       CONQUISTA E CONTADOR
+    ========================== */
+
+    .conquista {
+      color: white;
+      background:
+        radial-gradient(circle at 90% 20%, rgba(250, 204, 21, 0.35), transparent 25%),
+        linear-gradient(135deg, #312e81
+, #7c3aed
+, #be185d
+);
+    }
+
+    .conquista .titulo-secao p {
+      color: #eee8ff
+;
+    }
+
+    .conquista-conteudo {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .contador-box {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 24px;
+      padding: 34px;
+      backdrop-filter: blur(10px);
+    }
+
+    .contador {
+      font-size: 5rem;
+      line-height: 1;
+      font-weight: 900;
+      color: var(--amarelo);
+    }
+
+    .contador-box p {
+      margin-top: 10px;
+    }
+
+    .linha-do-tempo {
+      display: grid;
+      gap: 16px;
+    }
+
+    .ano-item {
+      display: grid;
+      grid-template-columns: 75px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.12);
+      border-left: 5px solid var(--amarelo);
+    }
+
+    .ano-item .ano {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--amarelo);
+    }
+
+    .ano-item h3 {
+      margin-bottom: 4px;
+    }
+
+    /* =========================
+       HISTÓRIA E GALERIA
+    ========================== */
+
+    .historia-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .historia-card {
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--sombra);
+    }
+
+    .historia-card h3 {
+      color: var(--roxo);
+      font-size: 1.7rem;
+      margin-bottom: 14px;
+    }
+
+    .historia-card p {
+      color: var(--texto-suave);
+      margin-bottom: 12px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .galeria-item {
+      min-height: 150px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 15px;
+      font-size: 2.7rem;
+      color: white;
+      box-shadow: var(--sombra);
+      transition: transform 0.25s ease;
+    }
+
+    .galeria-item:hover {
+      transform: rotate(2deg) scale(1.04);
+    }
+
+    .galeria-item span {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .galeria-item:nth-child(1) {
+      background: linear-gradient(135deg, var(--azul), #60a5fa
+);
+    }
+
+    .galeria-item:nth-child(2) {
+      background: linear-gradient(135deg, var(--rosa), #f9a8d4
+);
+    }
+
+    .galeria-item:nth-child(3) {
+      background: linear-gradient(135deg, var(--verde), #6ee7b7
+);
+    }
+
+    .galeria-item:nth-child(4) {
+      background: linear-gradient(135deg, var(--laranja), #fdba74
+);
+    }
+
+    /* =========================
+       RODAPÉ E BOTÃO TOPO
+    ========================== */
+
+    footer {
+      background: #17172a
+;
+      color: white;
+      padding: 35px 0;
+      text-align: center;
+    }
+
+    footer p {
+      color: #c9c8dc
+;
+    }
+
+    .voltar-topo {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: var(--rosa);
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: var(--sombra);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: 0.3s ease;
+    }
+
+    .voltar-topo.visivel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       RESPONSIVIDADE
+    ========================== */
+
+    @media (max-width: 850px) {
+      .botao-menu {
+        display: grid;
+      }
+
+      nav {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: var(--fundo-card);
+        border-bottom: 1px solid var(--borda);
+        display: none;
+      }
+
+      nav.aberto {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 5%;
+        gap: 0;
+      }
+
+      nav li a {
+        display: block;
+        padding: 13px 0;
+      }
+
+      .hero-conteudo,
+      .conquista-conteudo,
+      .historia-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-texto {
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .botoes {
+        justify-content: center;
+      }
+
+      .grid-meninas {
+        grid-template-columns: 1fr;
+      }
+
+      .galeria {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .secao {
+        padding: 65px 0;
+      }
+
+      .hero {
+        padding: 75px 0 60px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .bola-grande {
+        width: 220px;
+        height: 220px;
+      }
+
+      .bola-grande::before {
+        font-size: 3rem;
+      }
+
+      .ano-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .galeria-item {
+        min-height: 125px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =========================
+       CABEÇALHO
+  ========================== -->
+
+  <header>
+    <div class="container barra-navegacao">
+      <a href="#inicio" class="logo" aria-label="Ir para o início">
+        <span class="logo-bola">⚽</span>
+        <span>Três Meninas</span>
+      </a>
+
+      <nav id="menu" aria-label="Navegação principal">
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#meninas">As meninas</a></li>
+          <li><a href="#conquista">Nossa conquista</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+        </ul>
+      </nav>
+
+      <div class="acoes-menu">
+        <button
+          class="botao-icone"
+          id="botaoTema"
+          type="button"
+          aria-label="Ativar tema escuro"
+          title="Alternar tema"
+        >
+          🌙
+        </button>
+
+        <button
+          class="botao-menu"
+          id="botaoMenu"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero" id="inicio">
+      <div class="container hero-conteudo">
+        <div class="hero-texto">
+          <span class="etiqueta">⚽ Amizade, estudo e futebol</span>
+
+          <h1>
+            Três meninas.
+            <strong>Um sonho.</strong>
+          </h1>
+
+          <p>
+            Somos três meninas de Pinhal de São Bento, estudantes do
+            Colégio Estadual Presidente Vargas e apaixonadas por futebol.
+            Juntas, vivemos momentos inesquecíveis dentro e fora dos campos.
+          </p>
+
+          <div class="botoes">
+            <a href="#meninas" class="botao botao-principal">
+              Conheça nossa história
+            </a>
+
+            <a href="#conquista" class="botao botao-secundario">
+              Ver nossas conquistas
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-arte" aria-label="Bola colorida representando nossa trajetória">
+          <span class="estrela estrela-1">★</span>
+
+          <div class="bola-grande">
+            <strong>Bom de Bola</strong>
+
+            <div class="anos-bola">
+              <span class="ano-pequeno">2024</span>
+              <span class="ano-pequeno">2025</span>
+              <span class="ano-pequeno">2026</span>
+            </div>
+          </div>
+
+          <span class="estrela estrela-2">✦</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         PERFIS
+    ========================== -->
+
+    <section class="secao" id="meninas">
+      <div class="container">
+        <div class="titulo-secao">
+          <span>Nosso trio</span>
+          <h2>As meninas</h2>
+          <p>
+            Cada uma tem um jeito especial, mas juntas formamos um time cheio
+            de amizade, alegria e dedicação.
+          </p>
+        </div>
+
+        <div class="filtros" role="group" aria-label="Filtrar perfis">
+          <button class="filtro ativo" data-filtro="todos" type="button">
+            Todas
+          </button>
+          <button class="filtro" data-filtro="alessandra" type="button">
+            Alessandra
+          </button>
+          <button class="filtro" data-filtro="kevelly" type="button">
+            Kevelly
+          </button>
+          <button class="filtro" data-filtro="gaby" type="button">
+            Gaby
+          </button>
+        </div>
+
+        <div class="grid-meninas">
+          <article class="card-menina" data-nome="alessandra" style="--cor-card: #2563eb
+;">
+            <div class="avatar" aria-hidden="true">💙</div>
+            <h3>Alessandra</h3>
+            <div class="funcao">Dedicada e inteligente</div>
+
+            <p>
+              Sou uma menina dedicada, jogadora, linda, maravilhosa,
+              super feliz e inteligente.
+            </p>
+
+            <div class="mais-info">
+              <p>
+                Gosto de viver momentos especiais com minhas amigas e me
+                dedicar ao futebol e aos estudos.
+              </p>
+            </div>
+
+            <button class="ler-mais" type="button" aria-expanded="false">
+              Ler mais +
+            </button>
+          </article>
+
+          <article class="card-menina" data-nome="kevelly" style="--cor-card: #ec4899
+;">
+            <div class="avatar" aria-hidden="true">💗</div>
+            <h3>Kevelly</h3>
+            <div class="funcao">Estudiosa e apaixonada por futebol</div>
+
+            <p>
+              Sou perfeita e super estudiosa. Adoro jogar futebol desde
+              pequena e também cozinho muito bem.
+            </p>
+
+            <div class="mais-info">
+              <p>
+                Meu bolo é uma delícia e sempre gosto de compartilhar bons
+                momentos com as pessoas que fazem parte da minha história.
+              </p>
+            </div>
+
+            <button class="ler-mais" type="button" aria-expanded="false">
+              Ler mais +
+            </button>
+          </article>
+
+          <article class="card-menina" data-nome="gaby" style="--cor-card: #10b981
+;">
+            <div class="avatar" aria-hidden="true">💚</div>
+            <h3>Gaby Cemin</h3>
+            <div class="funcao">Craque e divertida</div>
+
+            <p>
+              Sou a melhor jogadora de Pinhal, linda, engraçada e tenho como
+              maior especialidade jogar futebol.
+            </p>
+
+            <div class="mais-info">
+              <p>
+                Minha alegria e meu jeito engraçado deixam os momentos com
+                minhas amigas ainda mais especiais.
+              </p>
+            </div>
+
+            <button class="ler-mais" type="button" aria-expanded="false">
+              Ler mais +
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         CONQUISTA
+    ========================== -->
+
+    <section class="secao conquista" id="conquista">
+      <div class="container">
+        <div class="titulo-secao">
+          <span>Uma trajetória especial</span>
+          <h2>Bom de Bola</h2>
+          <p>
+            Nossa história foi construída com dedicação, união e muita paixão
+            pelo futebol.
+          </p>
+        </div>
+
+        <div class="conquista-conteudo">
+          <div class="contador-box">
+            <div class="contador" id="contador">0</div>
+            <p>anos marcantes no Bom de Bola</p>
+          </div>
+
+          <div class="linha-do-tempo">
+            <article class="ano-item">
+              <div class="ano">2024</div>
+              <div>
+                <h3>Nosso primeiro ano</h3>
+                <p>
+                  No nosso primeiro ano no Bom de Bola, ficamos em segundo lugar.
+                </p>
+              </div>
+            </article>
+
+            <article class="ano-item">
+              <div class="ano">2025</div>
+              <div>
+                <h3>Um ano inesquecível</h3>
+                <p>
+                  Fomos campeãs da fase regional e da fase macrorregional,
+                  invictas. Chegamos até a fase estadual e fizemos história
+                  no nosso município.
+                </p>
+              </div>
+            </article>
+
+            <article class="ano-item">
+              <div class="ano">2026</div>
+              <div>
+                <h3>Mais uma grande conquista</h3>
+                <p>
+                  Em 2026, também ficamos em segundo lugar, mostrando novamente
+                  nossa dedicação e união.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         NOSSA HISTÓRIA
+    ========================== -->
+
+    <section class="secao" id="historia">
+      <div class="container">
+        <div class="titulo-secao">
+          <span>Onde tudo acontece</span>
+          <h2>Nossa história em Pinhal de São Bento</h2>
+        </div>
+
+        <div class="historia-grid">
+          <article class="historia-card">
+            <h3>Amizade que joga junto</h3>
+            <p>
+              Moramos em Pinhal de São Bento e estudamos no Colégio Estadual
+              Presidente Vargas.
+            </p>
+            <p>
+              O futebol nos aproximou e nos ensinou a importância da união,
+              da dedicação e de acreditar nos nossos sonhos.
+            </p>
+          </article>
+
+          <article class="historia-card">
+            <h3>Fizemos história</h3>
+            <p>
+              Nossa maior conquista foi o Bom de Bola 2025, quando fomos
+              campeãs da fase regional e macrorregional invictas.
+            </p>
+            <p>
+              Chegamos até a fase estadual e levamos o nome do nosso município
+              com muito orgulho.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         GALERIA
+    ========================== -->
+
+    <section class="secao" id="galeria">
+      <div class="container">
+        <div class="titulo-secao">
+          <span>Momentos especiais</span>
+          <h2>Galeria da nossa história</h2>
+          <p>
+            Uma galeria ilustrada com símbolos que representam nossa jornada.
+          </p>
+        </div>
+
+        <div class="galeria">
+          <div class="galeria-item">
+            ⚽
+            <span>Paixão pelo futebol</span>
+          </div>
+
+          <div class="galeria-item">
+            🏆
+            <span>Conquistas</span>
+          </div>
+
+          <div class="galeria-item">
+            ⭐
+            <span>Sonhos realizados</span>
+          </div>
+
+          <div class="galeria-item">
+            🤝
+            <span>Amizade e união</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================
+       RODAPÉ
+  ========================== -->
+
+  <footer>
+    <div class="container">
+      <p>
+        Feito com carinho por Alessandra, Kevelly e Gaby Cemin.
+      </p>
+      <p>
+        Pinhal de São Bento • Colégio Estadual Presidente Vargas
+      </p>
+    </div>
+  </footer>
+
+  <button
+    class="voltar-topo"
+    id="voltarTopo"
+    type="button"
+    aria-label="Voltar ao topo"
+    title="Voltar ao topo"
+  >
+    ↑
+  </button>
+
+  <script>
+    /* =========================
+       MENU RESPONSIVO
+    ========================== */
+
+    const botaoMenu = document.getElementById("botaoMenu");
+    const menu = document.getElementById("menu");
+
+    botaoMenu.addEventListener("click", () => {
+      const aberto = menu.classList.toggle("aberto");
+
+      botaoMenu.setAttribute("aria-expanded", aberto);
+      botaoMenu.setAttribute(
+        "aria-label",
+        aberto ? "Fechar menu" : "Abrir menu"
+      );
+
+      botaoMenu.textContent = aberto ? "×" : "☰";
+    });
+
+    document.querySelectorAll("nav a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("aberto");
+        botaoMenu.setAttribute("aria-expanded", "false");
+        botaoMenu.setAttribute("aria-label", "Abrir menu");
+        botaoMenu.textContent = "☰";
+      });
+    });
+
+    /* =========================
+       TEMA CLARO E ESCURO
+    ========================== */
+
+    const botaoTema = document.getElementById("botaoTema");
+
+    botaoTema.addEventListener("click", () => {
+      document.body.classList.toggle("escuro");
+
+      const escuroAtivo = document.body.classList.contains("escuro");
+
+      botaoTema.textContent = escuroAtivo ? "☀️" : "🌙";
+      botaoTema.setAttribute(
+        "aria-label",
+        escuroAtivo ? "Ativar tema claro" : "Ativar tema escuro"
+      );
+    });
+
+    /* =========================
+       FILTRO DOS PERFIS
+    ========================== */
+
+    const filtros = document.querySelectorAll(".filtro");
+    const cards = document.querySelectorAll(".card-menina");
+
+    filtros.forEach((filtro) => {
+      filtro.addEventListener("click", () => {
+        filtros.forEach((item) => item.classList.remove("ativo"));
+        filtro.classList.add("ativo");
+
+        const valor = filtro.dataset.filtro;
+
+        cards.forEach((card) => {
+          const deveMostrar =
+            valor === "todos" || card.dataset.nome === valor;
+
+          card.classList.toggle("escondido", !deveMostrar);
+        });
+      });
+    });
+
+    /* =========================
+       BOTÕES LER MAIS
+    ========================== */
+
+    document.querySelectorAll(".ler-mais").forEach((botao) => {
+      botao.addEventListener("click", () => {
+        const card = botao.closest(".card-menina");
+        const aberto = card.classList.toggle("aberto");
+
+        botao.textContent = aberto ? "Ler menos −" : "Ler mais +";
+        botao.setAttribute("aria-expanded", aberto);
+      });
+    });
+
+    /* =========================
+       CONTADOR ANIMADO
+    ========================== */
+
+    const contador = document.getElementById("contador");
+    let numeroAtual = 0;
+    const numeroFinal = 3;
+
+    const atualizarContador = () => {
+      numeroAtual++;
+
+      contador.textContent = numeroAtual;
+
+      if (numeroAtual < numeroFinal) {
+        setTimeout(atualizarContador, 450);
+      }
+    };
+
+    const observador = new IntersectionObserver(
+      (entradas, observer) => {
+        if (entradas[0].isIntersecting) {
+          atualizarContador();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observador.observe(contador);
+
+    /* =========================
+       BOTÃO VOLTAR AO TOPO
+    ========================== */
+
+    const voltarTopo = document.getElementById("voltarTopo");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 450) {
+        voltarTopo.classList.add("visivel");
+      } else {
+        voltarTopo.classList.remove("visivel");
+      }
+    });
+
+    voltarTopo.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+</html>
